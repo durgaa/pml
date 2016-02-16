@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<!-- saved from url=(0074)http://www.nicolomarchi.it/projects/practicalmachinelearning/exercise.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta http-equiv="x-ua-compatible" content="IE=9">
+
+<title>Practical Machine Learning Course Project</title>
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 12px;
+   margin: 8px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 { 
+   font-size:2.2em; 
+}
+
+h2 { 
+   font-size:1.8em; 
+}
+
+h3 { 
+   font-size:1.4em; 
+}
+
+h4 { 
+   font-size:1.0em; 
+}
+
+h5 { 
+   font-size:0.9em; 
+}
+
+h6 { 
+   font-size:0.8em; 
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre {	
+   margin-top: 0;
+   max-width: 95%;
+   border: 1px solid #ccc;
+   white-space: pre-wrap;
+}
+
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code.r, code.cpp {
+   background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * { 
+      background: transparent !important; 
+      color: black !important; 
+      filter:none !important; 
+      -ms-filter: none !important; 
+   }
+
+   body { 
+      font-size:12pt; 
+      max-width:100%; 
+   }
+       
+   a, a:visited { 
+      text-decoration: underline; 
+   }
+
+   hr { 
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote { 
+      padding-right: 1em; 
+      page-break-inside: avoid; 
+   }
+
+   tr, img { 
+      page-break-inside: avoid; 
+   }
+
+   img { 
+      max-width: 100% !important; 
+   }
+
+   @page :left { 
+      margin: 15mm 20mm 15mm 10mm; 
+   }
+     
+   @page :right { 
+      margin: 15mm 10mm 15mm 20mm; 
+   }
+
+   p, h2, h3 { 
+      orphans: 3; widows: 3; 
+   }
+
+   h2, h3 { 
+      page-break-after: avoid; 
+   }
+}
+
+</style>
+
+<!-- Styles for R syntax highlighter -->
+<style type="text/css">
+   pre .operator,
+   pre .paren {
+     color: rgb(104, 118, 135)
+   }
+
+   pre .literal {
+     color: rgb(88, 72, 246)
+   }
+
+   pre .number {
+     color: rgb(0, 0, 205);
+   }
+
+   pre .comment {
+     color: rgb(76, 136, 107);
+   }
+
+   pre .keyword {
+     color: rgb(0, 0, 255);
+   }
+
+   pre .identifier {
+     color: rgb(0, 0, 0);
+   }
+
+   pre .string {
+     color: rgb(3, 106, 7);
+   }
+</style>
+
+<!-- R syntax highlighter -->
+<script type="text/javascript">
+var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
+hljs.initHighlightingOnLoad();
+</script><style type="text/css"></style>
+
+
+
+
+<script type="text/javascript" src="./Practical Machine Learning Course Project_files/"></script><style>.daplinkverifier{margin:0;padding:0 !important;text-align:left;text-decoration:none;display:inline;position:absolute;z-index:100000;cursor:default !important;direction:ltr;zoom:1;background-color:#fff;}.daplinkverifier a,.daplinkverifier a:hover{margin:0 !important;padding:0 !important;border:0 currentColor !important;color:black !important;text-decoration:none !important;display:inline !important;background-image:none !important;}.daplv-Valid{margin:0;padding:0;width:10px !important;height:10px !important;vertical-align:middle;float:none;display:inline-block !important;background-image:url(http://127.0.0.1:10029/public/dap_validlink.png);background-repeat:no-repeat !important;}.daplv-WillNotVerify{margin:0;padding:0;width:10px !important;height:10px !important;vertical-align:middle;float:none;display:inline-block !important;background-image:url(http://127.0.0.1:10029/public/dap_premium.png);background-repeat:no-repeat !important;}.daplv-Pending{background:url(http://127.0.0.1:10029/public/dap_pendinglink.gif) no-repeat;margin:0;padding:0;width:10px !important;height:10px !important;vertical-align:middle;float:none;display:inline-block !important;}.daplv-Invalid{background:url(http://127.0.0.1:10029/public/dap_invalidlink.png) no-repeat;margin:0;padding:0;width:10px !important;height:10px !important;vertical-align:middle;float:none;display:inline-block !important;}.daplv-Unknown{background:url(http://127.0.0.1:10029/public/dap_unknown.gif) no-repeat;margin:0;padding:0;width:10px !important;height:10px !important;vertical-align:middle;float:none;display:inline-block !important;}.daplinkverifier .daplvinfo{background:url(http://127.0.0.1:10029/public/arrow.png) no-repeat left 0;margin:0;padding:0 0 0 12px;color:black !important;line-height:15px !important;font-family:arial !important;font-size:12px !important;font-weight:normal !important;display:none;visibility:hidden;position:absolute;z-index:100000;}.daplinkverifier .daplvinfo-rtl{background:url(http://127.0.0.1:10029/public/arrow-right.png) no-repeat right 0;margin:0;padding:0 12px 0 0;color:black !important;line-height:15px !important;font-family:arial;font-size:12px !important;font-weight:normal !important;display:none;visibility:hidden;position:absolute;z-index:100000;}.daplinkverifier .daplvinfo1{border-width:0 2px 2px;border-style:none solid solid;border-color:currentColor #56aed4 #56aed4;margin:-13px 0 0;padding:0 !important;position:relative;background-color:white !important;text-indent:0 !important;}table.daplv-data{margin:0 !important;padding:0;left:0;min-width:240px;}table.daplv-data tr{background-color:#fff !important;}table.daplv-data td{height:14px !important;line-height:15px;font-family:arial !important;font-size:12px !important;float:none !important;}table.daplv-data thead{margin:0;padding:0;background-color:#56aed4 !important;}table.daplv-data thead td{padding:5px;border:0 currentColor;color:black !important;background-color:#56aed4 !important;}table.daplv-data tbody td{margin:0;padding:5px 5px 0;border:0 currentColor;color:black !important;white-space:nowrap;}table.daplv-data tbody td strong{margin:0 !important;padding:0 !important;text-align:left !important;color:#000;font-size:12px !important;}.daplinkversettings{margin:0;padding:4px;font-size:12px !important;font-weight:normal !important;float:none !important;display:none;background-color:#e7e7e7;}.daplinkversettings a{color:#000 !important;font-size:12px !important;font-weight:normal !important;}.daplinkversettings table{width:220px;font-size:12px !important;font-weight:normal !important;margin:0 !important;padding:0 !important;}.daplinkversettings table tr{background-color:#e7e7e7 !important;}.daplinkversettings table td{margin:0;padding:3px;border:0 !important;}.daplinkversettings input{margin:10px 0 0;width:160px;color:black;font-size:11px;}.daplvwhatisthis{margin:0 !important;padding:0 !important;float:right !important;border:0 !important;}.daplvwhatisthis a{color:#fff !important;font-size:11px !important;font-weight:normal !important;text-decoration:underline !important;white-space:nowrap;background-color:#56aed4 !important;}.daplvwhatisthis a:hover{color:#fff !important;font-size:11px !important;font-weight:normal !important;text-decoration:underline !important;white-space:nowrap;}.daplvlogo{width:16px !important;height:15px !important;vertical-align:middle;margin:0 !important;}.daplvsubtitle{color:#8d7d82;}.daplvmoreLink{width:43px;text-align:right;margin-top:23px;float:right !important;}.daplvmoreLink a,.daplvmoreLink a:hover{color:black;font-size:11px;}.daplvDWL{margin:6px 0 6px 0 !important;width:146px;height:33px;}.daplvDWLAll{height:33px !important;margin-bottom:6px !important;float:right !important;margin-top:10px !important;}.daplv-clear{padding:0 !important;height:0 !important;line-height:0;clear:both;font-size:1px;background-color:transparent !important;}.cmenu{margin:0;padding:0;font-family:arial;font-size:12px;list-style-type:none;direction:ltr !important;background-color:#f0f0f0;}.cmenu img{border:0 currentColor;}.cmenu li{list-style:none !important;margin:0 !important;padding:0;}.cmenu a{padding:4px;border:1px solid #f0f0f0;color:black;text-decoration:none;display:block;cursor:pointer;background-color:#f0f0f0;}.cmenu a:hover{border:1px solid #aecff7;color:#000 !important;background-color:#e6edf6;}.dlvdivContext{padding:4px;border:1px solid #a0a0a0;display:none;position:absolute;background-color:#f0f0f0;}.daplinkverifier .exdaplvinfo{background:url(http://127.0.0.1:10029/public/ex-arrow.png) no-repeat left 0;margin:0;padding:0 0 0 21px;display:none;visibility:hidden;position:absolute;z-index:100000;}.daplinkverifier .exdaplvinfo-rtl{background:url(http://127.0.0.1:10029/public/ex-arrow-right.png) no-repeat right 0;margin:0;padding:0 21px 0 0;display:none;visibility:hidden;position:absolute;z-index:100000;}.daplinkverifier .exdaplvinfo1{background:url(http://127.0.0.1:10029/public/daplc-explanation-bg.jpg);margin:-21px 0 0;padding:0 !important;position:relative;}table.ex-daplv-data{margin:0;padding:0;left:0;width:465px !important;}table.ex-daplv-data thead{margin:0;padding:0;}table.ex-daplv-data thead td{height:61px !important;text-align:right !important;color:#fff !important;font-family:arial !important;font-size:32px !important;font-weight:bold;vertical-align:top !important;}table.ex-daplv-data thead td img{margin-top:10px !important;margin-right:10px !important;}table.ex-daplv-data tbody td{height:289px !important;color:#000 !important;line-height:21px !important;padding-top:7px !important;padding-left:177px !important;font-family:arial !important;font-size:16px !important;font-weight:bold !important;vertical-align:text-top !important;}table.ex-daplv-data tbody td div{padding-top:4px !important;padding-bottom:8px !important;}table.ex-daplv-data tbody td div a,table.ex-daplv-data tbody td div a:hover{color:#00597b !important;text-decoration:underline !important;}table.ex-daplv-data tbody td ul{list-style:none;margin:0 !important;padding:0 !important;}table.ex-daplv-data tbody td ul li.valid{background:url(http://127.0.0.1:10029/public/dap_validlink.png) no-repeat 25px 5px;margin:0;padding-top:0;padding-right:0;padding-bottom:3px !important;padding-left:42px;}table.ex-daplv-data tbody td ul li.pending{background:url(http://127.0.0.1:10029/public/dap_pendinglink.gif) no-repeat 25px 5px;margin:0;padding-top:0;padding-right:0;padding-bottom:3px !important;padding-left:42px;}table.ex-daplv-data tbody td ul li.invalid{background:url(http://127.0.0.1:10029/public/dap_invalidlink.png) no-repeat 25px 5px;margin:0;padding-top:0;padding-right:0;padding-bottom:3px !important;padding-left:42px;}table.daplv-data tbody td.dlvm-header{font-family:Arial !important;color:#000 !important;padding-bottom:5px !important;background-color:#e8f4fb !important;}table.daplv-data tbody td.dlvm-nav{text-align:left !important;padding:5px 0 0 5px !important;}.dlvmprev{margin-left:58px !important;cursor:pointer !important;font-size:16px !important;font-family:Arial !important;color:#000 !important;}.dlvmnext{cursor:pointer !important;font-size:16px !important;font-family:Arial !important;color:#000 !important;}.dlvmcur{margin:0 5px 0 5px !important;}.dlvfilename{font-weight:bold !important;}.dlvm-total{font-size:14px !important;font-weight:bold !important;}.dlvfloatleft{float:left !important;}</style></head>
+
+<body>
+<h1>Practical Machine Learning Course Project</h1>
+
+<h1></h1>
+
+<h2>Synopsis:</h2>
+
+<p>Using devices such as Jawbone Up, Nike FuelBand, and Fitbit it is now possible to collect a large amount of data about personal activity relatively inexpensively. These type of devices are part of the quantified self movement – a group of enthusiasts who take measurements about themselves regularly to improve their health, to find patterns in their behavior, or because they are tech geeks. One thing that people regularly do is quantify how much of a particular activity they do, but they rarely quantify how well they do it. In this project, your goal will be to use data from accelerometers on the belt, forearm, arm, and dumbell of 6 participants. They were asked to perform barbell lifts correctly and incorrectly in 5 different ways. More information is available from the website here: <a href="http://groupware.les.inf.puc-rio.br/har">http://groupware.les.inf.puc-rio.br/har</a> (see the section on the Weight Lifting Exercise Dataset). </p>
+
+<p>The goal of this project is to predict the manner in which the exercise is done. This is the "classe" variable in the training set. We use different variables to predict with. We will use prediction models to predict 20 different test case -</p>
+
+<h4>Initializing libraries and setup current working directory</h4>
+
+<pre><code class="r"><span class="identifier">rm</span><span class="paren">(</span><span class="identifier">list</span> <span class="operator">=</span> <span class="identifier">ls</span><span class="paren">(</span><span class="identifier">all</span> <span class="operator">=</span> <span class="literal">TRUE</span><span class="paren">)</span><span class="paren">)</span>
+
+<span class="identifier">setwd</span><span class="paren">(</span><span class="string">'/media/nicolo/Data/Coursera/PracticalMachineLearning/Data/PracticalMachineLearning'</span><span class="paren">)</span>
+
+<span class="keyword">library</span><span class="paren">(</span><span class="identifier">caret</span><span class="paren">)</span>
+
+<span class="identifier">trainingRaw</span> <span class="operator">&lt;-</span> <span class="identifier">read.csv</span><span class="paren">(</span><span class="identifier">file</span><span class="operator">=</span><span class="string">"pml-training.csv"</span>, <span class="identifier">header</span><span class="operator">=</span><span class="literal">TRUE</span>, <span class="identifier">as.is</span> <span class="operator">=</span> <span class="literal">TRUE</span>, <span class="identifier">stringsAsFactors</span> <span class="operator">=</span> <span class="literal">FALSE</span>, <span class="identifier">sep</span><span class="operator">=</span><span class="string">','</span>, <span class="identifier">na.strings</span><span class="operator">=</span><span class="identifier">c</span><span class="paren">(</span><span class="string">'NA'</span>,<span class="string">''</span>,<span class="string">'#DIV/0!'</span><span class="paren">)</span><span class="paren">)</span>
+<span class="identifier">testingRaw</span> <span class="operator">&lt;-</span> <span class="identifier">read.csv</span><span class="paren">(</span><span class="identifier">file</span><span class="operator">=</span><span class="string">"pml-testing.csv"</span>, <span class="identifier">header</span><span class="operator">=</span><span class="literal">TRUE</span>, <span class="identifier">as.is</span> <span class="operator">=</span> <span class="literal">TRUE</span>, <span class="identifier">stringsAsFactors</span> <span class="operator">=</span> <span class="literal">FALSE</span>, <span class="identifier">sep</span><span class="operator">=</span><span class="string">','</span>, <span class="identifier">na.strings</span><span class="operator">=</span><span class="identifier">c</span><span class="paren">(</span><span class="string">'NA'</span>,<span class="string">''</span>,<span class="string">'#DIV/0!'</span><span class="paren">)</span><span class="paren">)</span>
+
+<span class="identifier">trainingRaw</span><span class="operator">$</span><span class="identifier">classe</span> <span class="operator">&lt;-</span> <span class="identifier">as.factor</span><span class="paren">(</span><span class="identifier">trainingRaw</span><span class="operator">$</span><span class="identifier">classe</span><span class="paren">)</span>  
+</code></pre>
+
+
+<h4>Cleaning variables</h4>
+
+<p>After investigating all the variables of the sets, it's possible to see that there are a lot of values NA or useless or empty variables for the prediction. It's request to compute the prediction only on the accelerometers values of belt, forearm, arm and dumbell. So, the non-accelerometer measures are discard with the useless variables.</p>
+
+<pre><code class="r"><span class="identifier">NAindex</span> <span class="operator">&lt;-</span> <span class="identifier">apply</span><span class="paren">(</span><span class="identifier">trainingRaw</span>,<span class="number">2</span>,<span class="keyword">function</span><span class="paren">(</span><span class="identifier">x</span><span class="paren">)</span> <span class="paren">{</span><span class="identifier">sum</span><span class="paren">(</span><span class="identifier">is.na</span><span class="paren">(</span><span class="identifier">x</span><span class="paren">)</span><span class="paren">)</span><span class="paren">}</span><span class="paren">)</span> 
+<span class="identifier">trainingRaw</span> <span class="operator">&lt;-</span> <span class="identifier">trainingRaw</span><span class="paren">[</span>,<span class="identifier">which</span><span class="paren">(</span><span class="identifier">NAindex</span> <span class="operator">==</span> <span class="number">0</span><span class="paren">)</span><span class="paren">]</span>
+<span class="identifier">NAindex</span> <span class="operator">&lt;-</span> <span class="identifier">apply</span><span class="paren">(</span><span class="identifier">testingRaw</span>,<span class="number">2</span>,<span class="keyword">function</span><span class="paren">(</span><span class="identifier">x</span><span class="paren">)</span> <span class="paren">{</span><span class="identifier">sum</span><span class="paren">(</span><span class="identifier">is.na</span><span class="paren">(</span><span class="identifier">x</span><span class="paren">)</span><span class="paren">)</span><span class="paren">}</span><span class="paren">)</span> 
+<span class="identifier">testingRaw</span> <span class="operator">&lt;-</span> <span class="identifier">testingRaw</span><span class="paren">[</span>,<span class="identifier">which</span><span class="paren">(</span><span class="identifier">NAindex</span> <span class="operator">==</span> <span class="number">0</span><span class="paren">)</span><span class="paren">]</span>
+</code></pre>
+
+<h4>Preprocessing variables</h4>
+
+<pre><code class="r"><span class="identifier">v</span> <span class="operator">&lt;-</span> <span class="identifier">which</span><span class="paren">(</span><span class="identifier">lapply</span><span class="paren">(</span><span class="identifier">trainingRaw</span>, <span class="identifier">class</span><span class="paren">)</span> <span class="operator">%in%</span> <span class="string">"numeric"</span><span class="paren">)</span>
+
+<span class="identifier">preObj</span> <span class="operator">&lt;-</span><span class="identifier">preProcess</span><span class="paren">(</span><span class="identifier">trainingRaw</span><span class="paren">[</span>,<span class="identifier">v</span><span class="paren">]</span>,<span class="identifier">method</span><span class="operator">=</span><span class="identifier">c</span><span class="paren">(</span><span class="string">'knnImpute'</span>, <span class="string">'center'</span>, <span class="string">'scale'</span><span class="paren">)</span><span class="paren">)</span>
+<span class="identifier">trainLess1</span> <span class="operator">&lt;-</span> <span class="identifier">predict</span><span class="paren">(</span><span class="identifier">preObj</span>, <span class="identifier">trainingRaw</span><span class="paren">[</span>,<span class="identifier">v</span><span class="paren">]</span><span class="paren">)</span>
+<span class="identifier">trainLess1</span><span class="operator">$</span><span class="identifier">classe</span> <span class="operator">&lt;-</span> <span class="identifier">trainingRaw</span><span class="operator">$</span><span class="identifier">classe</span>
+
+<span class="identifier">testLess1</span> <span class="operator">&lt;-</span><span class="identifier">predict</span><span class="paren">(</span><span class="identifier">preObj</span>,<span class="identifier">testingRaw</span><span class="paren">[</span>,<span class="identifier">v</span><span class="paren">]</span><span class="paren">)</span>
+</code></pre>
+
+<h4>Removing the non zero variables</h4>
+
+<p>Removing the variables with values near zero, that means that they have not so much meaning in the predictions</p>
+
+<pre><code class="r"><span class="identifier">nzv</span> <span class="operator">&lt;-</span> <span class="identifier">nearZeroVar</span><span class="paren">(</span><span class="identifier">trainLess1</span>,<span class="identifier">saveMetrics</span><span class="operator">=</span><span class="literal">TRUE</span><span class="paren">)</span>
+<span class="identifier">trainLess1</span> <span class="operator">&lt;-</span> <span class="identifier">trainLess1</span><span class="paren">[</span>,<span class="identifier">nzv</span><span class="operator">$</span><span class="identifier">nzv</span><span class="operator">==</span><span class="literal">FALSE</span><span class="paren">]</span>
+
+<span class="identifier">nzv</span> <span class="operator">&lt;-</span> <span class="identifier">nearZeroVar</span><span class="paren">(</span><span class="identifier">testLess1</span>,<span class="identifier">saveMetrics</span><span class="operator">=</span><span class="literal">TRUE</span><span class="paren">)</span>
+<span class="identifier">testLess1</span> <span class="operator">&lt;-</span> <span class="identifier">testLess1</span><span class="paren">[</span>,<span class="identifier">nzv</span><span class="operator">$</span><span class="identifier">nzv</span><span class="operator">==</span><span class="literal">FALSE</span><span class="paren">]</span>
+</code></pre>
+
+<h4>Create cross validation set</h4>
+
+<p>The training set is divided in two parts, one for training and the other for cross validation</p>
+
+<pre><code class="r"><span class="identifier">set.seed</span><span class="paren">(</span><span class="number">12031987</span><span class="paren">)</span>
+
+<span class="identifier">inTrain</span> <span class="operator">=</span> <span class="identifier">createDataPartition</span><span class="paren">(</span><span class="identifier">trainLess1</span><span class="operator">$</span><span class="identifier">classe</span>, <span class="identifier">p</span> <span class="operator">=</span> <span class="number">3</span><span class="operator">/</span><span class="number">4</span>, <span class="identifier">list</span><span class="operator">=</span><span class="literal">FALSE</span><span class="paren">)</span>
+<span class="identifier">training</span> <span class="operator">=</span> <span class="identifier">trainLess1</span><span class="paren">[</span><span class="identifier">inTrain</span>,<span class="paren">]</span>
+<span class="identifier">crossValidation</span> <span class="operator">=</span> <span class="identifier">trainLess1</span><span class="paren">[</span><span class="operator">-</span><span class="identifier">inTrain</span>,<span class="paren">]</span>
+</code></pre>
+
+<h4>Train model</h4>
+
+<p>Train model with random forest due to its highly accuracy rate. The model is build on a training set of 28 variables from the initial 160. Cross validation is used as train control method.</p>
+
+<pre><code class="r"><span class="identifier">modFit</span> <span class="operator">&lt;-</span> <span class="identifier">train</span><span class="paren">(</span><span class="identifier">classe</span> <span class="operator">~</span>., <span class="identifier">method</span><span class="operator">=</span><span class="string">"rf"</span>, <span class="identifier">data</span><span class="operator">=</span><span class="identifier">train</span>, <span class="identifier">trControl</span><span class="operator">=</span><span class="identifier">trainControl</span><span class="paren">(</span><span class="identifier">method</span><span class="operator">=</span><span class="string">'cv'</span><span class="paren">)</span>, <span class="identifier">number</span><span class="operator">=</span><span class="number">5</span>, <span class="identifier">allowParallel</span><span class="operator">=</span><span class="literal">TRUE</span> <span class="paren">)</span>
+</code></pre>
+
+<pre><code>## Time difference of 13.05325 mins
+
+## Random Forest 
+## 
+## 14718 samples
+##    27 predictors
+##     5 classes: 'A', 'B', 'C', 'D', 'E' 
+## 
+## No pre-processing
+## Resampling: Cross-Validated (10 fold) 
+## 
+## Summary of sample sizes: 13246, 13245, 13248, 13245, 13247, 13246, ... 
+## 
+## Resampling results across tuning parameters:
+## 
+##   mtry  Accuracy  Kappa  Accuracy SD  Kappa SD
+##   2     0.993     0.991  0.00116      0.00147 
+##   14    0.992     0.99   0.0028       0.00354 
+##   27    0.989     0.987  0.00353      0.00446 
+## 
+## Accuracy was used to select the optimal model using  the largest value.
+## The final value used for the model was mtry = 2.  
+</code></pre>
+
+<h4>Accuracy on training set and cross validation set</h4>
+
+<p>Following the computation on the accuracy of trainig and cross validation set</p>
+
+<p>Training set:</p>
+
+<pre><code class="r"><span class="identifier">trainingPred</span> <span class="operator">&lt;-</span> <span class="identifier">predict</span><span class="paren">(</span><span class="identifier">modFit</span>, <span class="identifier">training</span><span class="paren">)</span>
+<span class="identifier">confusionMatrix</span><span class="paren">(</span><span class="identifier">trainingPred</span>, <span class="identifier">training</span><span class="operator">$</span><span class="identifier">classe</span><span class="paren">)</span>
+</code></pre>
+
+<pre><code>Confusion Matrix and Statistics
+
+          Reference
+Prediction    A    B    C    D    E
+         A 4185    0    0    0    0
+         B    0 2848    0    0    0
+         C    0    0 2567    0    0
+         D    0    0    0 2412    0
+         E    0    0    0    0 2706
+
+Overall Statistics
+
+               Accuracy : 1          
+                 95% CI : (0.9997, 1)
+    No Information Rate : 0.2843     
+    P-Value [Acc &gt; NIR] : &lt; 2.2e-16  
+
+                  Kappa : 1          
+ Mcnemar's Test P-Value : NA         
+
+Statistics by Class:
+
+                     Class: A Class: B Class: C Class: D Class: E
+Sensitivity            1.0000   1.0000   1.0000   1.0000   1.0000
+Specificity            1.0000   1.0000   1.0000   1.0000   1.0000
+Pos Pred Value         1.0000   1.0000   1.0000   1.0000   1.0000
+Neg Pred Value         1.0000   1.0000   1.0000   1.0000   1.0000
+Prevalence             0.2843   0.1935   0.1744   0.1639   0.1839
+Detection Rate         0.2843   0.1935   0.1744   0.1639   0.1839
+Detection Prevalence   0.2843   0.1935   0.1744   0.1639   0.1839
+Balanced Accuracy      1.0000   1.0000   1.0000   1.0000   1.0000
+</code></pre>
+
+<p>Cross validation set</p>
+
+<pre><code class="r"><span class="identifier">cvPred</span> <span class="operator">&lt;-</span> <span class="identifier">predict</span><span class="paren">(</span><span class="identifier">modFit</span>, <span class="identifier">crossValidation</span><span class="paren">)</span>
+<span class="identifier">confusionMatrix</span><span class="paren">(</span><span class="identifier">cvPred</span>, <span class="identifier">crossValidation</span><span class="operator">$</span><span class="identifier">classe</span><span class="paren">)</span>
+</code></pre>
+
+<pre><code>Confusion Matrix and Statistics
+
+          Reference
+Prediction    A    B    C    D    E
+         A 1392    3    0    0    0
+         B    2  944    2    0    0
+         C    0    2  852    3    0
+         D    0    0    1  801    3
+         E    1    0    0    0  898
+
+Overall Statistics
+
+               Accuracy : 0.9965         
+                 95% CI : (0.9945, 0.998)
+    No Information Rate : 0.2845         
+    P-Value [Acc &gt; NIR] : &lt; 2.2e-16      
+
+                  Kappa : 0.9956         
+ Mcnemar's Test P-Value : NA             
+
+Statistics by Class:
+
+                     Class: A Class: B Class: C Class: D Class: E
+Sensitivity            0.9978   0.9947   0.9965   0.9963   0.9967
+Specificity            0.9991   0.9990   0.9988   0.9990   0.9998
+Pos Pred Value         0.9978   0.9958   0.9942   0.9950   0.9989
+Neg Pred Value         0.9991   0.9987   0.9993   0.9993   0.9993
+Prevalence             0.2845   0.1935   0.1743   0.1639   0.1837
+Detection Rate         0.2838   0.1925   0.1737   0.1633   0.1831
+Detection Prevalence   0.2845   0.1933   0.1748   0.1642   0.1833
+Balanced Accuracy      0.9985   0.9969   0.9976   0.9976   0.9982
+</code></pre>
+
+<h4>RESULTS</h4>
+
+<p>Predictions on the real testing set</p>
+
+<pre><code class="r"><span class="identifier">testingPred</span> <span class="operator">&lt;-</span> <span class="identifier">predict</span><span class="paren">(</span><span class="identifier">modFit</span>, <span class="identifier">testLess1</span><span class="paren">)</span>
+<span class="identifier">testingPred</span>
+</code></pre>
+
+<pre><code> [1] B A B A A E D B A A B C B A E E A B B B
+</code></pre>
+
+
+
+
+
+<div>
+
+	
+		<title>DAP</title>
+		
+		<style type="text/css">
+			
+			/* DAP Download BAR */
+			div#DDB_DAPBar {width: 100%;height: 0px;border-top: 1px solid #d6d6d6;background-color: #d6d6d6;position: absolute;left: 0px;bottom: 0;z-index: 250000;text-align: left; color: #000000; visibility: hidden; font-family: 'Segoe UI'; direction: ltr; line-height: 15px;}
+			
+			div#DDB_DAPBar_control{position: absolute; right: 13px; top: 0px; margin-top: 14px;}
+			div#DDB_DAPBar_close{float:left; position: relative;z-index: 250001;width: 10px; height: 10px; margin: 1px 0px 0px 19px;}
+			div#DDB_DAPBar_close:hover{background-position: bottom !important;}
+			div#DDB_DAPBar .DDB_dwlbtnwrap{height: 50px;width: 257px; font-size: 15px; position: relative; float: left; margin: 16px 0px 0px 50px;}
+			div#DDB_DAPBar .DDB_dwlbtnwrap .dwlbtn{text-align: center; height: 50px;text-shadow: 0px -1px 0px #003716; font-weight: bold;background-color: #00a600;
+				background: -moz-linear-gradient(#00d004, #005600); 
+				background: -webkit-gradient(linear,left top,left bottom,color-stop(0, #00d004),color-stop(1, #005600));
+				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00d004', endColorstr='#005600',GradientType=0 );border: 1px solid #106b18;
+				background-image: -o-linear-gradient(rgb(0,208,4),rgb(0,86,0));
+			}
+			div#DDB_DAPBar .DDB_dwlbtnwrap .dwlbtn a{text-decoration: none; color: #ffffff !important;display: block; padding-top: 14px; height: 36px; font-size: 22px;}
+			div#DDB_DAPBar .DDB_dwlbtnwrap .mask{overflow: hidden;}
+			div#DDB_DAPBar .DDB_dwlbtnwrap .roundedCorners{border-radius: 6px;-moz-border-radius: 6px;-webkit-border-radius: 6px;}
+			div#DDB_DAPBar .DDB_dwlbtnwrap .dwlbtn:hover {background-color: #00d004;text-shadow: 0px -1px 0px #003716;border: 1px solid #106b18;
+				background: -moz-linear-gradient(#005600, #00d004);
+				background: -webkit-gradient(linear,left top,left bottom,color-stop(0, #005600),color-stop(1, #00d004));
+				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#005600', endColorstr='#00d004',GradientType=0 );
+				background-image: -o-linear-gradient(rgb(0,86,0),rgb(0,208,4));
+			}
+			div#DDB_DAPBar .DDB_dwlbtnwrap .gradient{filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#005600', endColorstr='#00d004',GradientType=0 ); /* IE6-9*/ }
+			div#DDB_DAPBar .clearall{ clear: both; line-height: 0px; height: 0px; font-size: 0px;}
+			div#DDB_DAPBar .ddbinst{font-size: 18px; padding-top: 10px; float: left; width: 640px;}
+			div#DDB_DAPBar .ddbinst a{text-decoration: none; color :#000000;}
+			div#DDB_DAPBar .ddb_dapinstall{float: left; padding-top: 10px;}
+			div#DDB_DAPBar .ddbInstallWrap{line-height: 20px; margin: 0px auto; width: 950px;}
+			div#DDB_DAPBar .ddbInstallWrap img{float: left; margin-right: 10px; border: 0px;width: 65px; height: 65px;}
+			
+			#DDB_DAPBarLogo {background: url(data:image/png;base64,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) no-repeat 0 0;float: left;width: 65px; height: 65px;}
+		</style>
+	
+	
+		<div id="DDB_DAPBar">
+			<div id="DDB_DAPBar_list"></div>
+			<div id="DDB_DAPBar_control"></div>
+		</div>
+		<!--<div id="DDB_DAPBar" style="visibility: visible; height: 82px;">
+			<div id="DDB_DAPBar_list"><div class="ddbInstallWrap"><div class="ddbinst"><div class="ddb_dapinstall"><strong>DAP Extenstion:</strong><br>To accelerate your downloads, install Download Accelerator Plus (DAP)</div><div class="clearall"></div></div><div class="DDB_dwlbtnwrap" title="Download Accelerator Plus (DAP) Free - Download button"><div class="mask roundedCorners"><div class="roundedCorners dwlbtn"><a href="http://download.speedbit.com/mag/dap10_gws_setup.exe">DOWNLOAD DAP</a></div></div></div><div class="clearall"></div></div></div>
+			<div id="DDB_DAPBar_control"><img src="http://www.speedbit.com/img/dapchrome/ddb-close.png" style="width: 65px; height: 65px;" alt="Close" /></div>
+		</div>-->
+	
+</div><embed type="application/x-dap-background" id="DAPPlugin" style="visibility: collapse"></body></html>
