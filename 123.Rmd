@@ -1,0 +1,163 @@
+
+#Practical Machine Learning Course Project
+
+##Synopsis:
+
+Using devices such as Jawbone Up, Nike FuelBand, and Fitbit it is now possible to collect a large amount of data about personal activity relatively inexpensively. These type of devices are part of the quantified self movement - a group of enthusiasts who take measurements about themselves regularly to improve their health, to find patterns in their behavior, or because they are tech geeks. One thing that people regularly do is quantify how much of a particular activity they do, but they rarely quantify how well they do it. In this project, your goal will be to use data from accelerometers on the belt, forearm, arm, and dumbell of 6 participants. They were asked to perform barbell lifts correctly and incorrectly in 5 different ways. More information is available from the website here: http://groupware.les.inf.puc-rio.br/har (see the section on the Weight Lifting Exercise Dataset).
+
+The goal of this project is to predict the manner in which the exercise is done. This is the "classe" variable in the training set. We use different variables to predict with. We will use prediction models to predict 20 different test case
+
+
+Initializing libraries and setup current working directory
+
+```{r}
+rm(list = ls(all = TRUE))
+library(randomForest)
+library(caret)
+trainingRaw <- read.csv(file="pml-training.csv", header=TRUE, as.is = TRUE, stringsAsFactors = FALSE, sep=',', na.strings=c('NA','','#DIV/0!'))
+testingRaw <- read.csv(file="pml-testing.csv", header=TRUE, as.is = TRUE, stringsAsFactors = FALSE, sep=',', na.strings=c('NA','','#DIV/0!'))
+
+trainingRaw$classe <- as.factor(trainingRaw$classe) 
+```
+
+```{r, echo=FALSE}
+rm(list = ls(all = TRUE))
+library(caret)
+trainingRaw <- read.csv(file="pml-training.csv", header=TRUE, as.is = TRUE, stringsAsFactors = FALSE, sep=',', na.strings=c('NA','','#DIV/0!'))
+testingRaw <- read.csv(file="pml-testing.csv", header=TRUE, as.is = TRUE, stringsAsFactors = FALSE, sep=',', na.strings=c('NA','','#DIV/0!'))
+
+trainingRaw$classe <- as.factor(trainingRaw$classe) 
+```
+
+##Cleaning variables
+
+After investigating all the variables of the sets, it's possible to see that there are a lot of values NA or useless or empty variables for the prediction. It's request to compute the prediction only on the accelerometers values of belt, forearm, arm and dumbell. So, the non-accelerometer measures are discard with the useless variables.
+
+
+```{r, echo=FALSE}
+NAindex <- apply(trainingRaw,2,function(x) {sum(is.na(x))}) 
+trainingRaw <- trainingRaw[,which(NAindex == 0)]
+NAindex <- apply(testingRaw,2,function(x) {sum(is.na(x))}) 
+testingRaw <- testingRaw[,which(NAindex == 0)]
+```
+
+```{r}
+NAindex <- apply(trainingRaw,2,function(x) {sum(is.na(x))}) 
+trainingRaw <- trainingRaw[,which(NAindex == 0)]
+NAindex <- apply(testingRaw,2,function(x) {sum(is.na(x))}) 
+testingRaw <- testingRaw[,which(NAindex == 0)]
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+##Preprocessing variables
+
+```{r}
+v <- which(lapply(trainingRaw, class) %in% "numeric")
+
+preObj <-preProcess(trainingRaw[,v],method=c('knnImpute', 'center', 'scale'))
+trainLess1 <- predict(preObj, trainingRaw[,v])
+trainLess1$classe <- trainingRaw$classe
+
+testLess1 <-predict(preObj,testingRaw[,v])
+```
+
+```{r, echo=FALSE}
+v <- which(lapply(trainingRaw, class) %in% "numeric")
+
+preObj <-preProcess(trainingRaw[,v],method=c('knnImpute', 'center', 'scale'))
+trainLess1 <- predict(preObj, trainingRaw[,v])
+trainLess1$classe <- trainingRaw$classe
+
+testLess1 <-predict(preObj,testingRaw[,v])
+```
+
+##Removing the non zero variables
+
+Removing the variables with values near zero, that means that they have not so much meaning in the predictions
+
+```{r}
+nzv <- nearZeroVar(trainLess1,saveMetrics=TRUE)
+trainLess1 <- trainLess1[,nzv$nzv==FALSE]
+
+nzv <- nearZeroVar(testLess1,saveMetrics=TRUE)
+testLess1 <- testLess1[,nzv$nzv==FALSE]
+```
+
+```{r,echo=FALSE}
+nzv <- nearZeroVar(trainLess1,saveMetrics=TRUE)
+trainLess1 <- trainLess1[,nzv$nzv==FALSE]
+
+nzv <- nearZeroVar(testLess1,saveMetrics=TRUE)
+testLess1 <- testLess1[,nzv$nzv==FALSE]
+```
+##Create cross validation set
+
+The training set is divided in two parts, one for training and the other for cross validation
+
+```{r}
+set.seed(12031987)
+
+inTrain = createDataPartition(trainLess1$classe, p = 3/4, list=FALSE)
+training = trainLess1[inTrain,]
+crossValidation = trainLess1[-inTrain,]
+```
+
+```{r,echo=FALSE}
+set.seed(12031987)
+
+inTrain = createDataPartition(trainLess1$classe, p = 3/4, list=FALSE)
+training = trainLess1[inTrain,]
+crossValidation = trainLess1[-inTrain,]
+```
+
+#Train model
+
+Train model with random forest due to its highly accuracy rate. The model is build on a training set of 28 variables from the initial 160. Cross validation is used as train control method.
+
+```{r}
+modFit <- train(classe ~., method="rf", data=training,trControl=trainControl(method='cv'), number=5, allowParallel=TRUE )
+```
+
+```{r,echo=FALSE}
+modFit <- train(classe ~., method="rf", data=training, trControl=trainControl(method='cv'), number=5, allowParallel=TRUE )
+```
+
+##Accuracy on training set and cross validation set
+
+Following the computation on the accuracy of trainig and cross validation set
+
+Training set:
+
+```{r}
+trainingPred <- predict(modFit, training)
+confusionMatrix(trainingPred, training$classe)
+```
+
+```{r,echo=FALSE}
+trainingPred <- predict(modFit, training)
+confusionMatrix(trainingPred, training$classe)
+```
+
+###Cross validation set
+
+```{r}
+cvPred <- predict(modFit, crossValidation)
+confusionMatrix(cvPred, crossValidation$classe)
+```
+
+```{r,echo=FALSE}
+cvPred <- predict(modFit, crossValidation)
+confusionMatrix(cvPred, crossValidation$classe)
+```
+##Results
+
+Final predicion on the result set
+```{r}
+testingPred <- predict(modFit, testLess1)
+testingPred
+```
+```{r,echo=FALSE}
+testingPred <- predict(modFit, testLess1)
+testingPred
+```
